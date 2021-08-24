@@ -15,7 +15,7 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->foreingId('user_id');
+            $table->foreignId('user_id');
             $table->string('subject', 150);
             $table->string('addressee');
             $table->enum('status', ['No enviado', 'Enviado'])->default('No enviado');
