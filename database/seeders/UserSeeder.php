@@ -21,6 +21,6 @@ class UserSeeder extends Seeder
             'identification_card' => '18308112',
             'date_of_birth' => '1986-01-28',
             'city_code' => '0',
-        ])->assignRole($roleAdmin);
+        ])->assignRole('Admin');
     }
 }
