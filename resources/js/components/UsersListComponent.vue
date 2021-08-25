@@ -27,8 +27,8 @@
                                     <td>{{ user.name }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-success" :href="`users/update/${user.id}`">Actualizar</a>
-                                        <a class="btn btn-sm btn-danger" v-on:click="userDelete">Eliminar</a>
+                                        <a class="btn btn-sm btn-success" :href="`${urlBase}/users/edit/${user.id}`">Actualizar</a>
+                                        <a class="btn btn-sm btn-danger" v-on:click="userDelete(user.id)">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -47,13 +47,15 @@
     import $ from 'jquery'; 
     import axios from 'axios';
 
+
     export default {
         props: [
             'users'
         ],
         data() {
             return {
-                usersList: this.users
+                usersList: this.users,
+                urlBase: window.location.origin
             }
         },
         mounted() {
@@ -67,8 +69,12 @@
             userUpdate(id) {
                 window.location = `${this.url('users/update/')}/${id}`
             },
-            userDelete(){
-                
+            userDelete(id) {
+                axios
+                .get(`${window.location.origin}/users/delete/${id}`)
+                .then(response => {
+                    window.location = `${window.location.origin}/users`
+                });
             }
         }
     }

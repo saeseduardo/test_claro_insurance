@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('users-list', require('./components/UsersListComponent.vue').default);
 Vue.component('user-create', require('./components/UserCreateComponent.vue').default)
+Vue.component('user-edit', require('./components/UserEditComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Registrar Usuario</div>
+                <div class="card-header">Editar Usuario</div>
 
                 <div class="card-body">
                     <form @submit.prevent="submit">
@@ -26,7 +26,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">Correo electronico</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" v-model="form.email"  required autocomplete="email">
+                                <input id="email" type="email" class="form-control" v-model="form.email"  readonly>
                                 <span class="text-danger" v-if="errors && errors.email">
                                     {{ errors.email[0] }}
                                 </span>  
@@ -49,7 +49,7 @@
                             <label for="identification_card" class="col-md-4 col-form-label text-md-right">Cedula de identidad</label>
 
                             <div class="col-md-6">
-                                <input id="identification_card" type="text" class="form-control" v-model="form.identification_card" required>
+                                <input id="identification_card" type="text" class="form-control" v-model="form.identification_card" readonly>
                                 <span class="text-danger" v-if="errors && errors.identification_card">
                                     {{ errors.identification_card[0] }}
                                 </span> 
@@ -97,33 +97,14 @@
 
                             <div class="col-md-6">
                                 <select id="cities" class="form-control" v-model="form.city_code">
-                                    <option disabled value="">Seleccione una ciudad</option>
-                                    <option v-for="city in cities" v-bind:key="city.city_name" v-bind:value="city.city_name">{{ city.city_name }}</option>
+                                    <option disabled selected >{{ form.city_code }}</option>
+                                    <option v-for="city in cities" v-bind:key="city.city_name" v-bind:value="city.city_name" >{{ city.city_name }}</option>
                                 </select>
                                 <span class="text-danger" v-if="errors && errors.city_code">
                                     {{ errors.city_code[0] }}
                                 </span>
                             </div>
 
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" v-model="form.password" required autocomplete="new-password">
-                                <span class="text-danger" v-if="errors && errors.password">
-                                    {{ errors.password[0] }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirmar contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" v-model="form.password_confirmation" required autocomplete="new-password">
-                            </div>
                         </div>
 
                         <div class="form-group row mb-0">
@@ -144,7 +125,7 @@
 <script>
 export default {
     props: [
-        'csrf'
+        'user'
     ],
     data() {
         return {
@@ -155,14 +136,12 @@ export default {
             selectCountry: '',
             selectState: '',
             form: {
-                name:'',
-                city_code: '',
-                email: '',
-                cell_phone_number: '',
-                identification_card: '',
-                date_of_birth: '',
-                password: '',
-                password_confirmation: ''
+                name: this.user.name,
+                city_code: this.user.city_code,
+                email: this.user.email,
+                cell_phone_number: this.user.cell_phone_number,
+                identification_card: this.user.identification_card,
+                date_of_birth: this.user.date_of_birth,
             }
         }
     },
@@ -205,7 +184,7 @@ export default {
             }
 
             axios
-            .post(`${window.location.origin}/users/create`, data)
+            .post(`${window.location.origin}/users/update/${this.user.id}`, data)
             .then(response => {
                 window.location = `${window.location.origin}/users`
             })
@@ -214,7 +193,7 @@ export default {
                     this.errors = error.response.data.errors;
                 }
             });
-        },
+        }
     }
 }
 </script>

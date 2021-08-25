@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
-use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
@@ -44,31 +43,11 @@ class UsersController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $newUser = new User();
-        $newUser->email = $request->email;
-        $newUser->name = $request->name;
-        $newUser->password = Hash::make($request->password);
-        $newUser->cell_phone_number = $request->cell_phone_number;
-        $newUser->identification_card = $request->identification_card;
-        $newUser->date_of_birth = $request->date_of_birth;
-        $newUser->city_code = $request->city_code;
-        $newUser->save();
-        $newUser->assignRole('Users');
+        $newUser = $this->userModel->newUser($request);
         return response()->json([
             'user' => $newUser,
             'status' => 200
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -77,9 +56,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(User $user)
+    {   
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -91,7 +70,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $editUser = $this->userModel->editUser($id, $request);
+        return response()->json([
+            'user' => $editUser,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -102,6 +85,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->userModel->find($id)->delete();
+        return response()->json([
+            'status' => 200
+        ]);
     }
 }
