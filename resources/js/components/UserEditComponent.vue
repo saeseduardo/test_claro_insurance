@@ -110,7 +110,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Registrar
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -186,7 +186,15 @@ export default {
             axios
             .post(`${window.location.origin}/users/update/${this.user.id}`, data)
             .then(response => {
-                window.location = `${window.location.origin}/users`
+                this.$fire({
+                    title: "Edicion de usuario",
+                    text: "Usuario editado exitosamente",
+                    type: "success",
+                    timer: 3000
+                }).then(r => {
+                    window.location = `${window.location.origin}/users`
+                });
+                
             })
             .catch(error => {
                 if(error.response.status === 422) {

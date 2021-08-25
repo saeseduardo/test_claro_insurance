@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
 
 /**
  * The following block of code may be used to automatically register your

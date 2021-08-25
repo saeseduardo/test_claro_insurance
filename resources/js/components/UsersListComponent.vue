@@ -59,6 +59,7 @@
             }
         },
         mounted() {
+            
             $('#table-users').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -70,10 +71,12 @@
                 window.location = `${this.url('users/update/')}/${id}`
             },
             userDelete(id) {
-                axios
-                .get(`${window.location.origin}/users/delete/${id}`)
-                .then(response => {
-                    window.location = `${window.location.origin}/users`
+                this.$confirm("Esta seguro de eliminar el usuario?").then(() => {
+                    axios
+                    .get(`${window.location.origin}/users/delete/${id}`)
+                    .then(response => {
+                        window.location = `${window.location.origin}/users`
+                    });
                 });
             }
         }

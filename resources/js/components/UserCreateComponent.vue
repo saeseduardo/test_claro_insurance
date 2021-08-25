@@ -207,7 +207,14 @@ export default {
             axios
             .post(`${window.location.origin}/users/create`, data)
             .then(response => {
-                window.location = `${window.location.origin}/users`
+                this.$fire({
+                    title: "Edicion de usuario",
+                    text: "Usuario editado exitosamente",
+                    type: "success",
+                    timer: 3000
+                }).then(r => {
+                    window.location = `${window.location.origin}/users`
+                });
             })
             .catch(error => {
                 if(error.response.status === 422) {
