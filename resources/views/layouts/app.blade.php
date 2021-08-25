@@ -37,7 +37,7 @@
                             <a href="{{ url('/users') }}" class="nav-link">Usuario</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/users') }}" class="nav-link">Correos</a>
+                            <a href="{{ route('email.users.create') }}" class="nav-link">Correos</a>
                         </li>
                     </ul>
 

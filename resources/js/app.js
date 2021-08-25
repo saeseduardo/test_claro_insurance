@@ -24,6 +24,7 @@ Vue.use(VueSimpleAlert);
 
 Vue.component('users-list', require('./components/UsersListComponent.vue').default);
 Vue.component('user-create', require('./components/UserCreateComponent.vue').default)
+Vue.component('email-create', require('./components/EmailCreateComponent.vue').default)
 Vue.component('user-edit', require('./components/UserEditComponent.vue').default)
 
 /**
