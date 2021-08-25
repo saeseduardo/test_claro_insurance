@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+
 use App\Models\User;
 
 class UsersController extends Controller
@@ -19,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->userModel->all();
+        $users = $this->userModel->role('Users')->get();
         return view('users.index', compact('users'));
     }
 
@@ -30,29 +32,22 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $newUser = $this->userModel->newUser($request);
+        return response()->json([
+            'user' => $newUser,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -61,9 +56,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(User $user)
+    {   
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -75,7 +70,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $editUser = $this->userModel->editUser($id, $request);
+        return response()->json([
+            'user' => $editUser,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -86,6 +85,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->userModel->find($id)->delete();
+        return response()->json([
+            'status' => 200
+        ]);
     }
 }

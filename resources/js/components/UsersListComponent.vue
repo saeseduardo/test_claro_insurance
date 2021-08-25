@@ -5,8 +5,8 @@
                 <div class="card">
                     <div class="card-header">Usuarios</div>
                     <div class="card-body">
-                        <a class="btn btn-sm btn-primary mb-4">Registrar Usuarios</a>
-                        <table class="table table-striped" id="table-users">
+                        <a class="btn btn-sm btn-primary mb-4" :href="`/users/create`">Registrar Usuarios</a>
+                        <table class="table table-striped col-md-12" id="table-users">
                             <thead>
                                 <tr>
                                     <td>#</td>
@@ -27,8 +27,8 @@
                                     <td>{{ user.name }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>
-                                        <p>Actualizar</p>
-                                        <p>Eliminar</p>
+                                        <a class="btn btn-sm btn-success" :href="`${urlBase}/users/edit/${user.id}`">Actualizar</a>
+                                        <a class="btn btn-sm btn-danger" v-on:click="userDelete(user.id)">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -45,6 +45,8 @@
     import "datatables.net-dt/js/dataTables.dataTables"
     import "datatables.net-dt/css/jquery.dataTables.min.css"
     import $ from 'jquery'; 
+    import axios from 'axios';
+
 
     export default {
         props: [
@@ -52,15 +54,31 @@
         ],
         data() {
             return {
-                usersList: this.users
+                usersList: this.users,
+                urlBase: window.location.origin
             }
         },
         mounted() {
+            
             $('#table-users').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
             });
+        },
+        methods: {
+            userUpdate(id) {
+                window.location = `${this.url('users/update/')}/${id}`
+            },
+            userDelete(id) {
+                this.$confirm("Esta seguro de eliminar el usuario?").then(() => {
+                    axios
+                    .get(`${window.location.origin}/users/delete/${id}`)
+                    .then(response => {
+                        window.location = `${window.location.origin}/users`
+                    });
+                });
+            }
         }
     }
 </script>

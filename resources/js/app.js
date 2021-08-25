@@ -7,6 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +23,8 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('users-list', require('./components/UsersListComponent.vue').default);
+Vue.component('user-create', require('./components/UserCreateComponent.vue').default)
+Vue.component('user-edit', require('./components/UserEditComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
