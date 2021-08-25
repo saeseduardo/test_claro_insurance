@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\UserMail;
+use App\Models\Email;
 
 class EmailController extends Controller
 {
@@ -12,7 +13,8 @@ class EmailController extends Controller
     }
 
     public function index(){
-
+        $email = Email::all();
+        return view('emails.index', compact('email'));
     }
 
     public function create(){
@@ -20,7 +22,12 @@ class EmailController extends Controller
     }
 
     public function send(Request $request){
+        $newEmail = Email::create([
+            'user_id' => \Auth::user()->id,
+            'subject' => $request->subject,
+            'email' => $request->email
+        ]);
         
-        \Mail::to($request->email)->send(new UserMail($request));
+        \Mail::to($newEmail)->send(new UserMail($request));
     }
 }

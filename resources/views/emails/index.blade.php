@@ -2,7 +2,6 @@
 
 @section('content')
     <email-list 
-        :users= '{{ json_encode($email) }}'
-        :users= '{{ json_encode($user) }}'
+        :email= '{{ json_encode($email) }}'
     />
 @endsection

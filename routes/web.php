@@ -34,5 +34,6 @@ Route::get('users/delete/{user}', [App\Http\Controllers\UsersController::class, 
 Route::post('users/create', [App\Http\Controllers\UsersController::class, 'store'])->name('admin.users.store');
 Route::post('users/update/{user}', [App\Http\Controllers\UsersController::class, 'update'])->name('admin.users.update');
 
+Route::get('email/index', [App\Http\Controllers\EmailController::class, 'index'])->name('email.users.index');
 Route::get('email/create', [App\Http\Controllers\EmailController::class, 'create'])->name('email.users.create');
 Route::post('email/create', [App\Http\Controllers\EmailController::class, 'send'])->name('email.users.create');
