@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\UserMail;
 use App\Models\Email;
+use Mail;
 
 class EmailController extends Controller
 {
@@ -28,6 +29,6 @@ class EmailController extends Controller
             'email' => $request->email
         ]);
         
-        \Mail::to($newEmail)->send(new UserMail($request));
+        Mail::to($newEmail)->send(new UserMail($request));
     }
 }

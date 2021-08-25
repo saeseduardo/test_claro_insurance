@@ -54634,7 +54634,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(email.subject))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(email.addressee))]),
+                      _c("td", [_vm._v(_vm._s(email.email))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(email.status))])
                     ])

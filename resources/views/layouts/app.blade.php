@@ -34,7 +34,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
+                        @if(@Auth::user()->hasRole('Admin'))
                             <a href="{{ url('/users') }}" class="nav-link">Usuario</a>
+                        @endif
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('email.users.create') }}" class="nav-link">Correos</a>

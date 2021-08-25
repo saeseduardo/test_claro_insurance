@@ -18,7 +18,7 @@
                                 <tr v-for="email in emailsList" v-bind:key="email.id">
                                     <td>{{ email.id }}</td>
                                     <td>{{ email.subject }}</td>
-                                    <td>{{ email.addressee }}</td>
+                                    <td>{{ email.email }}</td>
                                     <td>{{ email.status }}</td>
                                 </tr>
                             </tbody>
