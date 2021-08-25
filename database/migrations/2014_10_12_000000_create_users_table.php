@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('cell_phone_number', 10)->nullable();
             $table->string('identification_card', 11);
             $table->date('date_of_birth');
-            $table->integer('city_code');
+            $table->string('city_code', 200);
             $table->rememberToken();
             $table->timestamps();
         });

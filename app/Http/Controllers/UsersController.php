@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 
 class UsersController extends Controller
@@ -42,7 +44,20 @@ class UsersController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        return $request->all();
+        $newUser = new User();
+        $newUser->email = $request->email;
+        $newUser->name = $request->name;
+        $newUser->password = Hash::make($request->password);
+        $newUser->cell_phone_number = $request->cell_phone_number;
+        $newUser->identification_card = $request->identification_card;
+        $newUser->date_of_birth = $request->date_of_birth;
+        $newUser->city_code = $request->city_code;
+        $newUser->save();
+        $newUser->assignRole('Users');
+        return response()->json([
+            'user' => $newUser,
+            'status' => 200
+        ]);
     }
 
     /**

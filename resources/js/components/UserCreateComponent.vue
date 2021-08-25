@@ -96,12 +96,12 @@
                             <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">Ciudad</label>
 
                             <div class="col-md-6">
-                                <select id="cities" class="form-control" v-model="form.selectCity">
+                                <select id="cities" class="form-control" v-model="form.city_code">
                                     <option disabled value="">Seleccione una ciudad</option>
                                     <option v-for="city in cities" v-bind:key="city.city_name" v-bind:value="city.city_name">{{ city.city_name }}</option>
                                 </select>
-                                <span class="text-danger" v-if="errors && errors.selectCity">
-                                    {{ errors.selectCity[0] }}
+                                <span class="text-danger" v-if="errors && errors.city_code">
+                                    {{ errors.city_code[0] }}
                                 </span>
                             </div>
 
@@ -156,7 +156,7 @@ export default {
             selectState: '',
             form: {
                 name:'',
-                selectCity: '',
+                city_code: '',
                 email: '',
                 cell_phone_number: '',
                 identification_card: '',
@@ -207,7 +207,7 @@ export default {
             axios
             .post(`${window.location.origin}/users/create`, data)
             .then(response => {
-                console.log(response)
+                //window.location = `${window.location.origin}/users`
             })
             .catch(error => {
                 if(error.response.status === 422) {

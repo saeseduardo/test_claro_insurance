@@ -27,7 +27,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:100|min:1',
             'email' => 'email|required|unique:users',
             'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|confirmed',
-            'cell_phone_number' => 'min:10',
+            'cell_phone_number' => 'max:10',
             'identification_card' => 'required|string|unique:users|max:11',
             'date_of_birth' => 'required|date|'
         ];

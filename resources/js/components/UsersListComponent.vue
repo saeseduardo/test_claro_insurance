@@ -6,7 +6,7 @@
                     <div class="card-header">Usuarios</div>
                     <div class="card-body">
                         <a class="btn btn-sm btn-primary mb-4" :href="`/users/create`">Registrar Usuarios</a>
-                        <table class="table table-striped" id="table-users">
+                        <table class="table table-striped col-md-12" id="table-users">
                             <thead>
                                 <tr>
                                     <td>#</td>

@@ -2000,7 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
       selectState: '',
       form: {
         name: '',
-        selectCity: '',
+        city_code: '',
         email: '',
         cell_phone_number: '',
         identification_card: '',
@@ -2059,8 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
         data.append(key, this.form[key]);
       }
 
-      axios.post("".concat(window.location.origin, "/users/create"), data).then(function (response) {
-        console.log(response);
+      axios.post("".concat(window.location.origin, "/users/create"), data).then(function (response) {//window.location = `${window.location.origin}/users`
       })["catch"](function (error) {
         if (error.response.status === 422) {
           _this4.errors = error.response.data.errors;
@@ -54166,8 +54165,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.selectCity,
-                            expression: "form.selectCity"
+                            value: _vm.form.city_code,
+                            expression: "form.city_code"
                           }
                         ],
                         staticClass: "form-control",
@@ -54184,7 +54183,7 @@ var render = function() {
                               })
                             _vm.$set(
                               _vm.form,
-                              "selectCity",
+                              "city_code",
                               $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
@@ -54211,11 +54210,11 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _vm.errors && _vm.errors.selectCity
+                    _vm.errors && _vm.errors.city_code
                       ? _c("span", { staticClass: "text-danger" }, [
                           _vm._v(
                             "\n                                    " +
-                              _vm._s(_vm.errors.selectCity[0]) +
+                              _vm._s(_vm.errors.city_code[0]) +
                               "\n                                "
                           )
                         ])
@@ -54387,7 +54386,7 @@ var render = function() {
             _c(
               "table",
               {
-                staticClass: "table table-striped",
+                staticClass: "table table-striped col-md-12",
                 attrs: { id: "table-users" }
               },
               [
