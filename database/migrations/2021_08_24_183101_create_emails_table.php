@@ -17,7 +17,7 @@ class CreateEmailsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('subject', 150);
-            $table->string('addressee');
+            $table->string('email');
             $table->enum('status', ['No enviado', 'Enviado'])->default('No enviado');
             $table->timestamps();
         });
