@@ -19,7 +19,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->userModel->all();
+        $users = $this->userModel->role('Users')->get();
         return view('users.index', compact('users'));
     }
 
@@ -30,7 +30,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.register');
     }
 
     /**

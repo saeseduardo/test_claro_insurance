@@ -1911,6 +1911,12 @@ __webpack_require__.r(__webpack_exports__);
         "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
       }
     });
+  },
+  methods: {
+    userUpdate: function userUpdate(id) {
+      window.location = "".concat(this.url('users/update/'), "/").concat(id);
+    },
+    userDelete: function userDelete() {}
   }
 });
 
@@ -53433,9 +53439,14 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [_vm._v("Usuarios")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("a", { staticClass: "btn btn-sm btn-primary mb-4" }, [
-              _vm._v("Registrar Usuarios")
-            ]),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-sm btn-primary mb-4",
+                attrs: { href: "/users/create" }
+              },
+              [_vm._v("Registrar Usuarios")]
+            ),
             _vm._v(" "),
             _c(
               "table",
@@ -53462,7 +53473,25 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(user.email))]),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-success",
+                            attrs: { href: "users/update/" + user.id }
+                          },
+                          [_vm._v("Actualizar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-sm btn-danger",
+                            on: { click: _vm.userDelete }
+                          },
+                          [_vm._v("Eliminar")]
+                        )
+                      ])
                     ])
                   }),
                   0
@@ -53496,16 +53525,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("td", [_vm._v("Accion")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("p", [_vm._v("Actualizar")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Eliminar")])
     ])
   }
 ]

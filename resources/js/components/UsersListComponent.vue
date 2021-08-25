@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header">Usuarios</div>
                     <div class="card-body">
-                        <a class="btn btn-sm btn-primary mb-4">Registrar Usuarios</a>
+                        <a class="btn btn-sm btn-primary mb-4" :href="`/users/create`">Registrar Usuarios</a>
                         <table class="table table-striped" id="table-users">
                             <thead>
                                 <tr>
@@ -27,8 +27,8 @@
                                     <td>{{ user.name }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>
-                                        <p>Actualizar</p>
-                                        <p>Eliminar</p>
+                                        <a class="btn btn-sm btn-success" :href="`users/update/${user.id}`">Actualizar</a>
+                                        <a class="btn btn-sm btn-danger" v-on:click="userDelete">Eliminar</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -61,6 +61,14 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
             });
+        },
+        methods: {
+            userUpdate(id) {
+                window.location = `${this.url('users/update/')}/${id}`
+            },
+            userDelete(){
+                
+            }
         }
     }
 </script>
